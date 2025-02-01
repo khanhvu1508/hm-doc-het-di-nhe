@@ -29,7 +29,7 @@
       resize: none;
     }
     audio {
-      display: none; ..
+      display: none; /* Ẩn trình phát nhạc */
     }
   </style>
 </head>
@@ -37,30 +37,35 @@
   <textarea id="notePad" placeholder="hm..."></textarea>
 
   <!-- Thêm nhạc nền -->
-  <audio id="backgroundMusic" loop autoplay>
-    <source src="\Users\khanh\Downloads\nhacchill.m4a" type="audio/mp3"> <!-- Đường dẫn đến file nhạc của bạn -->
+  <audio id="backgroundMusic" loop>
+    <source src="\Users\khanh\Downloads\nhacchill.m4a" type="audio/m4a"> <!-- Đường dẫn đến file nhạc của bạn -->
     Trình duyệt của bạn không hỗ trợ thẻ audio.
   </audio>
 
+  <!-- Nút để phát nhạc -->
+  <button id="playMusicButton" style="position: absolute; top: 20px; background-color: #333; color: white; padding: 10px; border: none; font-size: 16px;">
+    Phát Nhạc
+  </button>
+
   <script>
-    // Cập nhật tự động, giúp người dùng có thể nhập trực tiếp lên màn hình
     const notePad = document.getElementById('notePad');
+    const music = document.getElementById('backgroundMusic');
+    const playMusicButton = document.getElementById('playMusicButton');
+
+    // Lắng nghe sự kiện nhấn nút để phát nhạc
+    playMusicButton.addEventListener('click', function() {
+      music.play();  // Phát nhạc khi nhấn nút
+      playMusicButton.style.display = 'none';  // Ẩn nút khi nhạc đã phát
+    });
 
     notePad.addEventListener('input', function() {
       localStorage.setItem('noteContent', notePad.value); // Lưu nội dung ghi chú vào localStorage
     });
 
-    // Khi tải lại trang, lấy lại nội dung đã lưu
     window.onload = function() {
       if (localStorage.getItem('noteContent')) {
         notePad.value = localStorage.getItem('noteContent');
       }
-    };
-
-    // Phát nhạc nền khi trang được tải
-    window.onload = function() {
-      const music = document.getElementById('backgroundMusic');
-      music.play();
     };
   </script>
 </body>
