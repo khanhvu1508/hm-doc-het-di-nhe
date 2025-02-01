@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tâm sự chút ha</title>
+  <title>tâm sự chút</title>
   <style>
     body {
       margin: 0;
@@ -28,10 +28,19 @@
       overflow-y: auto;
       resize: none;
     }
+    audio {
+      display: none; ..
+    }
   </style>
 </head>
 <body>
-  <textarea id="notePad" placeholder="hm ..."></textarea>
+  <textarea id="notePad" placeholder="hm..."></textarea>
+
+  <!-- Thêm nhạc nền -->
+  <audio id="backgroundMusic" loop autoplay>
+    <source src="\Users\khanh\Downloads\nhacchill.m4a" type="audio/mp3"> <!-- Đường dẫn đến file nhạc của bạn -->
+    Trình duyệt của bạn không hỗ trợ thẻ audio.
+  </audio>
 
   <script>
     // Cập nhật tự động, giúp người dùng có thể nhập trực tiếp lên màn hình
@@ -46,6 +55,12 @@
       if (localStorage.getItem('noteContent')) {
         notePad.value = localStorage.getItem('noteContent');
       }
+    };
+
+    // Phát nhạc nền khi trang được tải
+    window.onload = function() {
+      const music = document.getElementById('backgroundMusic');
+      music.play();
     };
   </script>
 </body>
